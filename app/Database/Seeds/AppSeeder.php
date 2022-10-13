@@ -8,6 +8,6 @@ class AppSeeder extends Seeder
 {
     public function run()
     {
-        //
+        $this->call('CorSeeder');
     }
 }
