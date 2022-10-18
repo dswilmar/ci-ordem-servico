@@ -16,5 +16,37 @@ class Usuarios extends BaseController
 
     public function index()
     {
+        $data = [
+            'titulo' => 'Usuários'
+        ];
+
+        return view('Usuarios/index', $data);
+    }
+
+    public function recuperaUsuarios()
+    {
+        // if (!$this->request->isAJAX()) {
+        //     return redirect()->back();
+        // }
+
+        $atributos = ['id', 'nome', 'email', 'ativo', 'imagem'];
+        $usuarios = $this->usuarioModel->select($atributos)->findAll();
+
+        $data = [];
+
+        foreach ($usuarios as $usuario) {
+            $data[] = [
+                'imagem' => $usuario->imagem,
+                'nome' => esc($usuario->nome),
+                'email' => esc($usuario->email),
+                'ativo' => ($usuario->ativo == true) ? 'Ativo' : '<span class="text-warning">Inativo</span>',
+            ];
+        }
+
+        $retorno = [
+            'data' => $data
+        ];
+
+        return $this->response->setJSON($retorno);
     }
 }
