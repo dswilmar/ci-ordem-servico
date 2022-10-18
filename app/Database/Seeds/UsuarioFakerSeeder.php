@@ -12,7 +12,7 @@ class UsuarioFakerSeeder extends Seeder
         $usuarioModel = new UsuarioModel();
         $faker = \Faker\Factory::create();
 
-        $qtdUsuariosFake = 50;
+        $qtdUsuariosFake = 20;
         $usuariosCriados = [];
 
         for ($i = 0; $i < $qtdUsuariosFake; $i++) {
@@ -20,7 +20,7 @@ class UsuarioFakerSeeder extends Seeder
                 'nome' => $faker->unique()->name(),
                 'email' => $faker->unique()->email(),
                 'senha_hash' => '123456', //mais tarde alterar
-                'ativo' => true
+                'ativo' => $faker->numberBetween(0, 1)
             ]);
         }
 
