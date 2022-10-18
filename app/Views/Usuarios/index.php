@@ -36,9 +36,41 @@ $this->endSection();
 $this->section('scripts'); ?>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/r-2.3.0/datatables.min.js"></script>
 <script type="text/javascript">
+    const DATATABLE_PTBR = {
+        "sEmptyTable": "Nenhum registro encontrado",
+        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sInfoThousands": ".",
+        "sLengthMenu": "_MENU_ resultados por página",
+        "sLoadingRecords": "Carregando...",
+        "sProcessing": "Processando...",
+        "sZeroRecords": "Nenhum registro encontrado",
+        "sSearch": "Pesquisar",
+        "oPaginate": {
+            "sNext": "Próximo",
+            "sPrevious": "Anterior",
+            "sFirst": "Primeiro",
+            "sLast": "Último"
+        },
+        "oAria": {
+            "sSortAscending": ": Ordenar colunas de forma ascendente",
+            "sSortDescending": ": Ordenar colunas de forma descendente"
+        },
+        "select": {
+            "rows": {
+                "_": "Selecionado %d linhas",
+                "0": "Nenhuma linha selecionada",
+                "1": "Selecionado 1 linha"
+            }
+        }
+    }
+
     $(document).ready(function() {
         $('#ajax-table').DataTable({
-            ajax: "<?php echo site_url('usuarios/recuperausuarios') ?>",
+            oLanguage: DATATABLE_PTBR,
+            ajax: 'usuarios/recuperausuarios',
             columns: [{
                     "data": "imagem"
                 },
@@ -51,7 +83,11 @@ $this->section('scripts'); ?>
                 {
                     "data": "ativo"
                 },
-            ]
+            ],
+            deferRender: true,
+            processing: true,
+            responsive: true,
+            pagingType: $(window).width() < 768 ? "simple" : "simple_numbers"
         });
     });
 </script>
