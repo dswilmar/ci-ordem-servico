@@ -25,9 +25,9 @@ class Usuarios extends BaseController
 
     public function recuperaUsuarios()
     {
-        // if (!$this->request->isAJAX()) {
-        //     return redirect()->back();
-        // }
+        if (!$this->request->isAJAX()) {
+            return redirect()->back();
+        }
 
         $atributos = ['id', 'nome', 'email', 'ativo', 'imagem'];
         $usuarios = $this->usuarioModel->select($atributos)->findAll();
@@ -37,7 +37,7 @@ class Usuarios extends BaseController
         foreach ($usuarios as $usuario) {
             $data[] = [
                 'imagem' => $usuario->imagem,
-                'nome' => esc($usuario->nome),
+                'nome' => anchor("usuarios/exibir/$usuario->id", esc($usuario->nome)),
                 'email' => esc($usuario->email),
                 'ativo' => ($usuario->ativo == true) ? '<span class="text-success"><i class="fa fa-unlock"></i></span> Ativo' : '<span class="text-warning"><i class="fa fa-lock"></i></span> Inativo',
             ];
