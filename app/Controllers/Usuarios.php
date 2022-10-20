@@ -49,4 +49,28 @@ class Usuarios extends BaseController
 
         return $this->response->setJSON($retorno);
     }
+
+    public function exibir(int $id = null)
+    {
+        $usuario = $this->buscaUsuario($id);
+        $data = [
+            'titulo' => 'Exibindo o usuário ' . esc($usuario->nome),
+            'usuario' => $usuario
+        ];
+        return view('Usuarios/exibir', $data);
+    }
+
+    /**
+     * Método que recupera um usuário
+     *
+     * @param integer $id
+     * @return Exception|object     
+     **/
+    private function buscaUsuario(int $id = null)
+    {
+        if (!$id || !$usuario = $this->usuarioModel->withDeleted(true)->find($id)) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Usuário $id não encontrado");
+        }
+        return $usuario;
+    }
 }
