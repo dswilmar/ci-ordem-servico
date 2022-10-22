@@ -24,8 +24,8 @@ $this->section('conteudo');
             <hr class="border-secondary">
             <h5 class="card-title mt-2"><?php echo $usuario->nome ?></h5>
             <p class="card-text"><?php echo esc($usuario->email) ?></p>
-            <p class="card-text">Criado <?php echo $usuario->criado_em ?></p>
-            <p class="card-text">Atualizado <?php echo $usuario->atualizado_em ?></p>
+            <p class="card-text">Criado <?php echo $usuario->criado_em->humanize() ?></p>
+            <p class="card-text">Atualizado <?php echo $usuario->atualizado_em->humanize() ?></p>
             <!-- Ações -->
             <a href="<?php echo site_url("usuarios") ?>" class="btn btn-secondary mr-2">Voltar</a>
             <div class="btn-group">
