@@ -60,6 +60,16 @@ class Usuarios extends BaseController
         return view('Usuarios/exibir', $data);
     }
 
+    public function editar(int $id = null)
+    {
+        $usuario = $this->buscaUsuario($id);
+        $data = [
+            'titulo' => 'Editando o usuário ' . esc($usuario->nome),
+            'usuario' => $usuario
+        ];
+        return view('Usuarios/editar', $data);
+    }
+
     /**
      * Método que recupera um usuário
      *
