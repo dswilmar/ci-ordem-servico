@@ -70,6 +70,19 @@ class Usuarios extends BaseController
         return view('Usuarios/editar', $data);
     }
 
+    public function atualizar()
+    {
+        if (!$this->request->isAJAX()) {
+            return redirect()->back();
+        }
+        $post = $this->request->getPost();
+        $retorno['token'] = csrf_hash();
+        $retorno['erro'] = 'Essa é uma mensagem do backend';
+        return $this->response->setJSON($retorno);
+        echo '<pre>';
+        print_r($post);
+    }
+
     /**
      * Método que recupera um usuário
      *
